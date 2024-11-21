@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор выражения</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .counter {
+      display: inline-block;
+      margin-left: 0px;
+      margin-top:10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Калькулятор расхода прибыли минус комиссия</h2>
+    <div class="input-group">
+      <label for="x">Введите общую сумму покупки:</label>
+      <input type="number" id="x" placeholder="Например: 1352">
+    </div>
+    <div class="input-group">
+      <label for="y">Введите цену покупки:</label>
+      <input type="number" id="y" placeholder="Например: 5.4">
+    </div>
+    <div class="input-group">
+      <label for="z">Введите цену продажи:</label>
+      <input type="number" id="z" placeholder="Например: 5.5">
+    </div>
+    <button onclick="calculate()">Рассчитать</button>
+    <button onclick="transferResult()">повторить сделку</button>
+    <span class="counter" id="transferCounter">количество повторений: 0</span>
+    <div class="result" id="result"></div>
+    <div class="result" id="adjustedResult"></div>
+  </div>
+
+  <script>
+    let lastResult = 0;
+    let transferCount = 0;
+
+    function calculateExpression(x, y, z) {
+      const base = x / y - (x / y * 0.001);
+      return base * z - (base * z * 0.001);
+    }
+
+    function calculate() {
+      const x = parseFloat(document.getElementById('x').value);
+      const y = parseFloat(document.getElementById('y').value);
+      const z = parseFloat(document.getElementById('z').value);
+
+      if (isNaN(x) || isNaN(y) || isNaN(z)) {
+        document.getElementById('result').textContent = 'Пожалуйста, заполните все поля корректными числами.';
+        document.getElementById('adjustedResult').textContent = '';
+        return;
+      }
+
+      const result = calculateExpression(x, y, z);
+      lastResult = result; // Сохраняем результат для переноса
+      const adjustedResult = result - x;
+
+      document.getElementById('result').textContent = `Результат: ${result.toFixed(3)}`;
+      document.getElementById('adjustedResult').textContent = `Чистая прибыль: ${adjustedResult.toFixed(3)}`;
+    }
+
+    function transferResult() {
+      if (lastResult !== 0) {
+        document.getElementById('x').value = lastResult.toFixed(3);
+        transferCount++; // Увеличиваем счетчик
+        document.getElementById('transferCounter').textContent = `Счетчик: ${transferCount}`;
+        calculate()
+      } else {
+        alert('Сначала рассчитайте результат.');
+      }
+    }
+  </script>
+</body>
+</html>
