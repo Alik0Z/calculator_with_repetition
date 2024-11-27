@@ -85,10 +85,7 @@
       const y = parseFloat(document.getElementById('y').value);
       const z = parseFloat(document.getElementById('z').value);
       
-       if (lastResult !== 0) {
-        transferCount++;
-        document.getElementById('transferCounter').textContent = `Счетчик: ${transferCount}`;
-       }   
+  
       if (isNaN(x) || isNaN(y) || isNaN(z)) {
         document.getElementById('result').textContent = 'Пожалуйста, заполните все поля корректными числами.';
         document.getElementById('adjustedResult').textContent = '';
@@ -99,6 +96,8 @@
       lastResult = result; // Сохраняем результат для переноса
       const adjustedResult = result - x;
 
+      transferCount++;
+      document.getElementById('transferCounter').textContent = `Счетчик: ${transferCount}`;
       document.getElementById('result').textContent = `Результат: ${result.toFixed(3)}`;
       document.getElementById('adjustedResult').textContent = `Чистая прибыль: ${adjustedResult.toFixed(3)}`;
     }
