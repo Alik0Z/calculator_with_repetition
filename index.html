@@ -66,14 +66,14 @@
     </div>
     <button onclick="calculate()">Рассчитать</button>
     <button onclick="transferResult()">повторить сделку</button>
-    <span class="counter" id="transferCounter">количество повторений: 0</span>
+    <span class="counter" id="transferCounter">количество повторений: 1</span>
     <div class="result" id="result"></div>
     <div class="result" id="adjustedResult"></div>
   </div>
 
   <script>
     let lastResult = 0;
-    let transferCount = 0;
+    let transferCount = 1;
 
     function calculateExpression(x, y, z) {
       const base = x / y - (x / y * 0.001);
