@@ -73,7 +73,7 @@
 
   <script>
     let lastResult = 0;
-    let transferCount = 1;
+    let transferCount = 0;
 
     function calculateExpression(x, y, z) {
       const base = x / y - (x / y * 0.001);
@@ -84,7 +84,8 @@
       const x = parseFloat(document.getElementById('x').value);
       const y = parseFloat(document.getElementById('y').value);
       const z = parseFloat(document.getElementById('z').value);
-
+      
+      transferCount++;
       if (isNaN(x) || isNaN(y) || isNaN(z)) {
         document.getElementById('result').textContent = 'Пожалуйста, заполните все поля корректными числами.';
         document.getElementById('adjustedResult').textContent = '';
