@@ -96,8 +96,7 @@
       lastResult = result; // Сохраняем результат для переноса
       const adjustedResult = result - x;
 
-      transferCount++;
-      document.getElementById('transferCounter').textContent = `Счетчик: ${transferCount}`;
+      
       document.getElementById('result').textContent = `Результат: ${result.toFixed(3)}`;
       document.getElementById('adjustedResult').textContent = `Чистая прибыль: ${adjustedResult.toFixed(3)}`;
     }
